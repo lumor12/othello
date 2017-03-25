@@ -1,24 +1,42 @@
 #include <iostream>
-
+#include "Othello.h"
 using namespace std;
 
-void show_start_game();
+
 char get_player();
 int get_order(char cplayer);
 void testing();
-void testing2();
+void testing2(char othello[][8]);
 void PrintInstructions();
+
 
 int main()
 {
+    //testing to see github updates.
     char player;
     int order;
     PrintInstructions();
-    char othello2[8][8];
-    show_start_game();
-    cout << "\n for testing\n " << endl;
-    testing();
-    testing2();
+    char othello[8][8];
+
+    Othello o;
+
+    //show_start_game(othello);
+    cout << "\n for testing\n "  <<endl;
+    o.buildArray(othello);
+    cout << endl;
+    o.printArray(othello);
+
+    // To search for the instance of character passed
+    o.searchChar(othello, 'X');
+    /*for(int row=0; row < 8; row++){
+        for(int column=0; column < 8; column++){
+            cout << othello[row][column] << " ";
+        }
+        cout << endl;
+    }*/
+
+    //testing();
+    //testing2(othello);
 
     //player = get_player();
 
@@ -26,35 +44,6 @@ int main()
 
     return 0;
 }
-
-void testing2(){
-    char othello[8][8];
-     for(int row=0; row < 8; row++){
-        for(int column=0; column < 8; column++){
-            if((row == 3 && column == 3) || (row==4 && column==4)){
-                othello[row][column] = 'X';
-            }
-            else if((row == 3 && column == 4) || (row==4 && column == 3)){
-                othello[row][column] = 'O';
-            }
-            else{
-                othello[row][column] = '|';
-            }
-        }
-     }
-    int i = 0;
-    for(int row=0; row < 8; row++){
-        for(int column=0; column < 8; column++){
-            i++;
-            if(othello[row][column]=='X'){
-                cout << "first X at " << i-1 << endl;
-            }
-        }
-        cout << endl;
-    }
-}
-
-
 
 void testing(){
     int test[8][8];
@@ -115,40 +104,8 @@ char get_player(){
     }
 }
 
-void show_start_game(){
-    char othello[8][8];
-     cout << "Would you like a play a game?\n" << endl;
-
-     for(int row=0; row < 8; row++){
-        for(int column=0; column < 8; column++){
-            if((row == 3 && column == 3) || (row==4 && column==4)){
-                othello[row][column] = 'X';
-            }
-            else if((row == 3 && column == 4) || (row==4 && column == 3)){
-                othello[row][column] = 'O';
-            }
-            else{
-                othello[row][column] = '|';
-            }
-        //cout << endl;
-        }
-     }
-
-    for(int row=0; row < 8; row++){
-        for(int column=0; column < 8; column++){
-            cout << othello[row][column] << " ";
-        }
-        cout << endl;
-    }
-   // return 0;
-}
 
 void PrintInstructions()
 {
-	cout << "\n---------Othello Game---------" << endl << endl;
-	cout << "Instructions : \n\n"
-		<< "1 - If you want to quit the game type 'quit' and then press enter.\n\n"
-		<< "2 - To place your piece, enter the column character followed by the row number   (For Example = a5)\n\n*Note* column character is not case sensitive\n\n"
-		<< "3 - visit the game rules and intro at :\n'http://www.site-constructor.com/othello/othellorules.html' \n\n"
-		<< endl ;
+
 }
