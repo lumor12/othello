@@ -6,16 +6,12 @@ using namespace std;
 char get_player();
 int get_order(char cplayer);
 void testing();
-void testing2(char othello[][8]);
-void PrintInstructions();
-
 
 int main()
 {
     //testing to see github updates.
     char player;
     int order;
-    PrintInstructions();
     char othello[8][8];
 
     Othello o;
@@ -102,10 +98,4 @@ char get_player(){
             cout << " you entered an invalid response, try again " << endl;
         }
     }
-}
-
-
-void PrintInstructions()
-{
-
 }
