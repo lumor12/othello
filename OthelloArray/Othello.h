@@ -7,8 +7,8 @@ class Othello
     public:
         Othello();
         void buildArray(char othello[][8]);
-        void printArray(char othello[][8]);
-        void searchChar(char othello[][8], char var);
+        void printGameBoard(char othello[][8]);
+        void searchChar(char othello[][8], int cords[][2], char var);
         ~Othello();
 
 

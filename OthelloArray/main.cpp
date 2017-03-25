@@ -2,15 +2,13 @@
 #include "Othello.h"
 using namespace std;
 
-
 char get_player();
 int get_order(char cplayer);
 void testing();
 
 int main()
 {
-    //testing to see github updates.
-    char player;
+   char player;
     int order;
     char othello[8][8];
 
@@ -20,17 +18,17 @@ int main()
     cout << "\n for testing\n "  <<endl;
     o.buildArray(othello);
     cout << endl;
-    o.printArray(othello);
 
     // To search for the instance of character passed
-    o.searchChar(othello, 'X');
+    int cords[8][2];
+    o.searchChar(othello, cords, 'X');
     /*for(int row=0; row < 8; row++){
         for(int column=0; column < 8; column++){
             cout << othello[row][column] << " ";
         }
         cout << endl;
     }*/
-
+    //o.printGameBoard(othello);
     //testing();
     //testing2(othello);
 
