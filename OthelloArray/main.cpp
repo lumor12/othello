@@ -1,10 +1,12 @@
 #include <iostream>
 #include "Othello.h"
+#include "Othello2.h"
 using namespace std;
 
 char get_player();
 int get_order(char cplayer);
 void testing();
+void test2();
 
 int main()
 {
@@ -36,6 +38,12 @@ int main()
 
     //order = get_order(player);
 
+	cout << "\nthis is the test of Othello2" << endl;
+	test2();
+
+
+	system("PAUSE");
+
     return 0;
 }
 
@@ -65,7 +73,7 @@ int get_order(char cplayer){
     while(true){
         cout << "OK player " << cplayer << ", enter 1 or 2 for order. " << endl;
         cin >> cint;
-        if(cint == 1 or cint == 2){
+        if(cint == 1 || cint == 2){
             if(cint == 1){
                 cout << "Player " << cplayer << " you are first!" << endl;
             }else{
@@ -96,4 +104,32 @@ char get_player(){
             cout << " you entered an invalid response, try again " << endl;
         }
     }
+}
+
+void test2() {
+
+	char player1 = 'X';
+	char player2 = 'O';
+
+	//create a new game
+	Othello2 game = Othello2();
+
+	//display game board
+	game.printGameBoard();
+
+	//find the position of each players pieces on the board and print them
+	game.findPieces(player1);
+	game.printXPieces();
+	game.findPieces(player2);
+	game.printOPieces();
+
+	//set the current player to X and get the available moves and print them
+	game.setCurrentPlayer(player1);
+	game.availableMoves();
+	game.printXMoves();
+
+	//set the current player to O and get the available moves and print them
+	game.setCurrentPlayer(player2);
+	game.availableMoves();
+	game.printOMoves();
 }
