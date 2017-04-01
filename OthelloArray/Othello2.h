@@ -32,4 +32,7 @@ class Othello2
 		void printXMoves();
 		void printOMoves();
 		bool positionInBounds(int x, int y);
+		void xMove();
+		void oMove();
+		void flips(int frow, int fcol);
 };

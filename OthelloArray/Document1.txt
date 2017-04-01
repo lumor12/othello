@@ -1,0 +1,21 @@
+Othello2 game = Othello2();
+
+//display game board
+game.printGameBoard();
+
+//find the position of each players pieces on the board and print them
+game.findPieces(player1);
+game.printXPieces();
+game.findPieces(player2);
+game.printOPieces();
+
+//set the current player to X and get the available moves and print them
+game.setCurrentPlayer(player1);
+game.availableMoves();
+game.printXMoves();
+
+//set the current player to O and get the available moves and print them
+game.setCurrentPlayer(player2);
+game.availableMoves();
+game.printOMoves();
+
