@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Othello.h"
 #include "Othello2.h"
+#include <queue>
 using namespace std;
 
 char get_player();
@@ -32,6 +33,28 @@ int main()
     //order = get_order(player);
 
     return 0;
+}
+
+
+void testing(){
+    int test[2];
+    //queue<int, int> testqueue;
+    int i = 0;
+    for(int row=0; row < 8; row++){
+        for(int column=0; column < 8; column++){
+           // test[row][column] = i++;
+        }
+        //cout << endl;
+    }
+
+
+    for(int row=0; row < 8; row++){
+        for(int column=0; column < 8; column++){
+            //cout << test[row][column] << " ";
+        }
+        cout << endl;
+    }
+   // return 0;
 }
 
 void test2() {
@@ -67,28 +90,6 @@ void test2() {
         game.oMove();
     }
 }
-
-
-void testing(){
-    int test[8][8];
-    int i = 0;
-    for(int row=0; row < 8; row++){
-        for(int column=0; column < 8; column++){
-            test[row][column] = i++;
-        }
-        //cout << endl;
-    }
-
-
-    for(int row=0; row < 8; row++){
-        for(int column=0; column < 8; column++){
-            cout << test[row][column] << " ";
-        }
-        cout << endl;
-    }
-   // return 0;
-}
-
 
 int get_order(char cplayer){
     int cint;

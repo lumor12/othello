@@ -13,6 +13,8 @@ class Othello2
 		int O_movesAvail[8][2];
 		int X_moves = 0;
 		int O_moves = 0;
+		int X_flips = 2;
+		int O_flips = 2;
 
 	public:
 		Othello2();

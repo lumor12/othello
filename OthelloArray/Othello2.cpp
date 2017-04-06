@@ -186,79 +186,72 @@ void Othello2::flips(int frow, int fcol) {
 	int tempY = 0;
 	int i = 0;
     if (currentPlayer == 'X') {
-            cout << "did anything happen X? " << currentPlayer <<endl;
-			for (deltaX = -1; deltaX < 2; deltaX++) {
-                cout << " first loop? " << currentPlayer <<endl;
-                int testi = 0;
-                int temparray[8][2];
-				for (deltaY = -1; deltaY < 2; deltaY++) {
-					if (deltaX != 0 || deltaY != 0) {
-						tempX = frow + deltaX;
-						tempY = fcol + deltaY;
-
-						if (positionInBounds(tempX, tempY) && board[tempX][tempY] == 'O') {
-							while (positionInBounds(tempX, tempY) && board[tempX][tempY] == 'O' && board[tempX][tempY] != 'X') {
-								cout << " x what is tempX and temp Y " << tempX << " , " << tempY << endl;
-								temparray[testi][0] = tempX;
-								temparray[testi][1] = tempY;
-								testi++;
-								if(board[tempX+deltaX][tempY+deltaY] == 'X'){
-                                    cout << " O if tempX and temp Y " << tempX+deltaX << " , " << tempY+deltaY << endl;
-                                    cout << " test is " << testi << endl;
-                                    for(int j=0; j<testi;j++){
-                                        board[temparray[j][0]][temparray[j][1]] = 'X';
-                                        cout << " with j " << tempX+j << " , " << tempY+j << endl;
-                                    }
-								}
-								tempX = tempX + deltaX;
-								tempY = tempY + deltaY;
-
-							}
-						}
-						if (positionInBounds(tempX, tempY) && (board[tempX][tempY] == '|' || board[tempX][tempY] == 'X')) {
-							continue;
-						}
-					}
-				}
-			}
-		//X_moves = i;
+            //cout << "did anything happen X? " << currentPlayer <<endl;
+        for (deltaX = -1; deltaX < 2; deltaX++) {
+            //cout << " first loop? " << currentPlayer <<endl;
+            for (deltaY = -1; deltaY < 2; deltaY++) {
+                if (frow + deltaX < 0 || frow + deltaX >= 8 ||
+                    fcol + deltaY < 0 || fcol + deltaY >= 8 ||
+                        (deltaX == 0 && deltaY == 0))  {
+                            continue;
+                        }
+                //cout << " should be here a few times " << tempX << " " << tempY <<endl;
+                if (board[frow + deltaX][fcol + deltaY] == 'O') {
+                    tempX = frow + deltaX;
+                    tempY = fcol + deltaY;
+                    for(;;){
+                        tempX += deltaX;
+                        tempY += deltaY;
+                        if(tempX < 0 || tempX >= 8 || tempY < 0 || tempY >= 8){
+                            break;
+                        }
+                        if(board[tempX][tempY] == ' '){
+                            break;
+                        }
+                        if(board[tempX][tempY] == 'X'){
+                            while(board[tempX -= deltaX][tempY -= deltaY] == 'O'){
+                                board[tempX][tempY] = 'X';
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+        }
 	}
 	if (currentPlayer == 'O') {
-            cout << " O did anything happen X? " << currentPlayer <<endl;
-			for (deltaX = -1; deltaX < 2; deltaX++) {
-                   cout << " first loop? " << currentPlayer <<endl;
-                   int testi = 0;
-                   int temparray[8][2];
-				for (deltaY = -1; deltaY < 2; deltaY++) {
-					if (deltaX != 0 || deltaY != 0) {
-						tempX = frow + deltaX;
-						tempY = fcol + deltaY;
-
-						if (positionInBounds(tempX, tempY) && board[tempX][tempY] == 'X' ) {
-							while (positionInBounds(tempX, tempY) && board[tempX][tempY] == 'X') {
-								cout << " O what is tempX and temp Y " << tempX << " , " << tempY << endl;
-								temparray[testi][0] = tempX;
-								temparray[testi][1] = tempY;
-								testi++;
-								if(board[tempX+deltaX][tempY+deltaY] == 'O'){
-                                    cout << " O if tempX and temp Y " << tempX+deltaX << " , " << tempY+deltaY << endl;
-                                    cout << " test is " << testi << endl;
-                                    for(int j=0; j<testi;j++){
-                                        board[temparray[j][0]][temparray[j][1]] = 'O';
-                                        cout << " with j " << tempX+j << " , " << tempY+j << endl;
-                                    }
-								}
-								tempX = tempX + deltaX;
-								tempY = tempY + deltaY;
-							}
-						}
-						if (positionInBounds(tempX, tempY) && (board[tempX][tempY] == '|' || board[tempX][tempY] == 'X')) {
-							continue;
-						}
-					}
-				}
-			}
-		//X_moves = i;
+            //cout << "did anything happen X? " << currentPlayer <<endl;
+        for (deltaX = -1; deltaX < 2; deltaX++) {
+            //cout << " first loop? " << currentPlayer <<endl;
+            for (deltaY = -1; deltaY < 2; deltaY++) {
+                if (frow + deltaX < 0 || frow + deltaX >= 8 ||
+                    fcol + deltaY < 0 || fcol + deltaY >= 8 ||
+                        (deltaX == 0 && deltaY == 0))  {
+                            continue;
+                        }
+                //cout << " should be here a few times " << tempX << " " << tempY <<endl;
+                if (board[frow + deltaX][fcol + deltaY] == 'X') {
+                    tempX = frow + deltaX;
+                    tempY = fcol + deltaY;
+                    for(;;){
+                        tempX += deltaX;
+                        tempY += deltaY;
+                        if(tempX < 0 || tempX >= 8 || tempY < 0 || tempY >= 8){
+                            break;
+                        }
+                        if(board[tempX][tempY] == ' '){
+                            break;
+                        }
+                        if(board[tempX][tempY] == 'O'){
+                            while(board[tempX -= deltaX][tempY -= deltaY] == 'X'){
+                                board[tempX][tempY] = 'O';
+                            }
+                        break;
+                        }
+                    }
+                }
+            }
+        }
 	}
 }
 
@@ -270,11 +263,11 @@ void Othello2::oMove(){
     cin >> orow;
     cout << "which column? " ;
     cin >> ocol;
-    cout << "you chose row -" << orow << " col-" << ocol << endl;
+    //cout << "you chose row -" << orow << " col-" << ocol << endl;
     while(in ==0){
         for(int row = 0; row < O_moves; row++){
             if(O_movesAvail[row][0]==orow && O_movesAvail[row][1]==ocol){
-                cout << "That is a legal move, store and update " << getCurrentPlayer()<< endl;
+                //cout << "That is a legal move, store and update " << getCurrentPlayer()<< endl;
                 board[orow][ocol] = 'O';
                 //printGameBoard();
                 flips(orow, ocol);
@@ -300,11 +293,11 @@ void Othello2::xMove(){
     cin >> xrow;
     cout << "which column? " ;
     cin >> xcol;
-    cout << "you chose row -" << xrow << " col-" << xcol << endl;
+    //cout << "you chose row -" << xrow << " col-" << xcol << endl;
     while(in ==0){
         for(int row = 0; row < X_moves; row++){
             if(X_movesAvail[row][0]==xrow && X_movesAvail[row][1]==xcol){
-                cout << "That is a legal move, store and update " << currentPlayer << endl;
+                //cout << "That is a legal move, store and update " << currentPlayer << endl;
                 board[xrow][xcol] = 'X';
                 flips(xrow, xcol);
                 XNumPieces =0;

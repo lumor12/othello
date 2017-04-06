@@ -10,7 +10,7 @@ Othello::Othello()
 		<< "2 - To place your piece, enter the column character followed by the row number   (For Example = a5)\n\n*Note* column character is not case sensitive\n\n"
 		<< "3 - visit the game rules and intro at :\n'http://www.site-constructor.com/othello/othellorules.html' \n\n"
 		<< endl ;
-    cout << "Would you like a play a game?\n" << endl;
+    cout << "Would you like to play a game?\n" << endl;
 }
 
 void Othello::searchChar(char othello[][8], int cords[][2], char var){
