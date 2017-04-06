@@ -156,6 +156,23 @@ void Othello2::findPieces(char p) {
 	}std::cout << endl;
 }
 
+//saves the position of the pieces for player p in an array to be access later by availableMoves()
+void Othello2::findPieces2() {
+	int x = 0;  //tally position var was found. Will change to cordinates
+	int o = 0; // tally # of vars found
+	for (int row = 0; row < 8; row++) {
+		for (int column = 0; column < 8; column++) {
+			if (board[row][column] == 'X') {
+				x++;
+			}
+			if (board[row][column] == 'O'){
+                o++;
+			}
+		}
+	}
+	cout << " X = " << x << " O = " << o << endl;
+}
+
 void Othello2::printGameBoard() {
 	for (int row = 0; row < 8; row++) {
 		for (int column = 0; column < 8; column++) {
@@ -185,7 +202,10 @@ void Othello2::flips(int frow, int fcol) {
 	int tempX = 0;
 	int tempY = 0;
 	int i = 0;
-    if (currentPlayer == 'X') {
+	// used to define player and opponent for each move
+	char opponent = (currentPlayer == 'O')? 'X' : 'O';
+	//cout << "Opponet = " << opponent << " CurrentPlayer = " << currentPlayer << endl;
+    /*if (currentPlayer == 'X') {*/
             //cout << "did anything happen X? " << currentPlayer <<endl;
         for (deltaX = -1; deltaX < 2; deltaX++) {
             //cout << " first loop? " << currentPlayer <<endl;
@@ -196,7 +216,7 @@ void Othello2::flips(int frow, int fcol) {
                             continue;
                         }
                 //cout << " should be here a few times " << tempX << " " << tempY <<endl;
-                if (board[frow + deltaX][fcol + deltaY] == 'O') {
+                if (board[frow + deltaX][fcol + deltaY] == opponent) {
                     tempX = frow + deltaX;
                     tempY = fcol + deltaY;
                     for(;;){
@@ -208,9 +228,9 @@ void Othello2::flips(int frow, int fcol) {
                         if(board[tempX][tempY] == ' '){
                             break;
                         }
-                        if(board[tempX][tempY] == 'X'){
-                            while(board[tempX -= deltaX][tempY -= deltaY] == 'O'){
-                                board[tempX][tempY] = 'X';
+                        if(board[tempX][tempY] == currentPlayer){
+                            while(board[tempX -= deltaX][tempY -= deltaY] == opponent){
+                                board[tempX][tempY] = currentPlayer;
                             }
                             break;
                         }
@@ -218,41 +238,7 @@ void Othello2::flips(int frow, int fcol) {
                 }
             }
         }
-	}
-	if (currentPlayer == 'O') {
-            //cout << "did anything happen X? " << currentPlayer <<endl;
-        for (deltaX = -1; deltaX < 2; deltaX++) {
-            //cout << " first loop? " << currentPlayer <<endl;
-            for (deltaY = -1; deltaY < 2; deltaY++) {
-                if (frow + deltaX < 0 || frow + deltaX >= 8 ||
-                    fcol + deltaY < 0 || fcol + deltaY >= 8 ||
-                        (deltaX == 0 && deltaY == 0))  {
-                            continue;
-                        }
-                //cout << " should be here a few times " << tempX << " " << tempY <<endl;
-                if (board[frow + deltaX][fcol + deltaY] == 'X') {
-                    tempX = frow + deltaX;
-                    tempY = fcol + deltaY;
-                    for(;;){
-                        tempX += deltaX;
-                        tempY += deltaY;
-                        if(tempX < 0 || tempX >= 8 || tempY < 0 || tempY >= 8){
-                            break;
-                        }
-                        if(board[tempX][tempY] == ' '){
-                            break;
-                        }
-                        if(board[tempX][tempY] == 'O'){
-                            while(board[tempX -= deltaX][tempY -= deltaY] == 'X'){
-                                board[tempX][tempY] = 'O';
-                            }
-                        break;
-                        }
-                    }
-                }
-            }
-        }
-	}
+	//}
 }
 
 void Othello2::oMove(){

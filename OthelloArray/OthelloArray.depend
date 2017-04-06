@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1491402173 source:c:\users\administrator\desktop\school\spring2017\480\othello\othelloarray\main.cpp
+1491519312 source:c:\users\administrator\desktop\school\spring2017\480\othello\othelloarray\main.cpp
 	<iostream>
 	"Othello.h"
 	"Othello2.h"
@@ -11,9 +11,9 @@
 	<iostream>
 	"Othello.h"
 
-1491402884 c:\users\administrator\desktop\school\spring2017\480\othello\othelloarray\othello2.h
+1491519255 c:\users\administrator\desktop\school\spring2017\480\othello\othelloarray\othello2.h
 
-1491494543 source:c:\users\administrator\desktop\school\spring2017\480\othello\othelloarray\othello2.cpp
+1491519283 source:c:\users\administrator\desktop\school\spring2017\480\othello\othelloarray\othello2.cpp
 	<iostream>
 	"Othello2.h"
 

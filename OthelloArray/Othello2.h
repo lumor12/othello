@@ -37,4 +37,5 @@ class Othello2
 		void xMove();
 		void oMove();
 		void flips(int frow, int fcol);
+		void findPieces2();
 };

@@ -15,46 +15,21 @@ int main()
     int order;
     char othello[8][8];
 
-   // Othello o;
+    //player = get_player();
 
-    //show_start_game(othello);
-//cout << "\n for testing or not\n "  <<endl;
-   // o.buildArray(othello);
-    //cout << endl;
+    //char opponent = (player == 'O')? 'X' : 'O';
 
-    // To search for the instance of character passed
-    //int cords[8][2];
-    //o.searchChar(othello, cords, 'X');
+    //cout << "Opponet = " << opponent << " player = " << player << endl;
+
+    //order = get_order(player);
+//    largest = ((a > b) ? a : b);
+
+
 
 	cout << "\nthis is the test of Othello2" << endl;
 	test2();
-    //player = get_player();
-
-    //order = get_order(player);
 
     return 0;
-}
-
-
-void testing(){
-    int test[2];
-    //queue<int, int> testqueue;
-    int i = 0;
-    for(int row=0; row < 8; row++){
-        for(int column=0; column < 8; column++){
-           // test[row][column] = i++;
-        }
-        //cout << endl;
-    }
-
-
-    for(int row=0; row < 8; row++){
-        for(int column=0; column < 8; column++){
-            //cout << test[row][column] << " ";
-        }
-        cout << endl;
-    }
-   // return 0;
 }
 
 void test2() {
@@ -68,7 +43,7 @@ void test2() {
 	//display game board
 	game.printGameBoard();
 
-    for(int maini = 0; maini < 4 ; maini ++){
+    for(int maini = 0; maini < 20 ; maini ++){
 	//find the position of each players pieces on the board and print them
         game.findPieces(player1);
         //game.printXPieces();
@@ -80,6 +55,7 @@ void test2() {
         game.availableMoves();
         game.printXMoves();
         game.xMove();
+        game.findPieces2();
 
         //set the current player to O and get the available moves and print them
         game.findPieces(player2);
@@ -88,6 +64,7 @@ void test2() {
         game.printOMoves();
         //game.printGameBoard();
         game.oMove();
+        game.findPieces2();
     }
 }
 
@@ -127,6 +104,28 @@ char get_player(){
             cout << " you entered an invalid response, try again " << endl;
         }
     }
+}
+
+
+void testing(){
+    int test[2];
+    //queue<int, int> testqueue;
+    int i = 0;
+    for(int row=0; row < 8; row++){
+        for(int column=0; column < 8; column++){
+           // test[row][column] = i++;
+        }
+        //cout << endl;
+    }
+
+
+    for(int row=0; row < 8; row++){
+        for(int column=0; column < 8; column++){
+            //cout << test[row][column] << " ";
+        }
+        cout << endl;
+    }
+   // return 0;
 }
 
     /*for(int row=0; row < 8; row++){
