@@ -16,6 +16,7 @@ class Othello2
 		int X_flips = 2;
 		int O_flips = 2;
 
+
 	public:
 		Othello2();
 		~Othello2() { };
@@ -33,9 +34,11 @@ class Othello2
 		void printOPieces();
 		void printXMoves();
 		void printOMoves();
-		bool positionInBounds(int x, int y);
+		friend bool positionInBounds(int x, int y);
 		void xMove();
 		void oMove();
 		void flips(int frow, int fcol);
 		void findPieces2();
+		double eval_func(char currentBoard[8][8]);
+		friend int numValidMoves(char player, char opp, char currentBoard[8][8]);
 };

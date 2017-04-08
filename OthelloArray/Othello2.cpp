@@ -314,9 +314,211 @@ void Othello2::printOMoves() {
 	}
 }
 
-bool Othello2::positionInBounds(int x, int y) {
+bool positionInBounds(int x, int y) {
 	if (x >= 0 && x < 8 && y >= 0 && y < 8)
 		return true;
 	else
 		return false;
+}
+
+double Othello2::eval_func(char currentBoard[8][8]) {
+	double score = 0;
+	double hCorners, hMovesAvail, hCurrentPieces, hFuturePieces, hCornerCloseness, hPieceValue;
+	int ai_pieces = 0, opp_pieces = 0, ai_futPieces = 0, opp_futPieces = 0;
+
+	int deltaX[] = {-1, -1, -1, 0, 1, 1, 1, 0};
+	int deltaY[] = {-1, 0, 1, 1, 1, 0, -1, -1};
+
+	int pValues[8][8] = {{ 20, -3, 11, 8, 8, 11, -3, 20 },
+						{ -3, -7, -4, 1, 1, -4, -7, -3 },
+						{ 11, -4, 2, 2, 2, 2, -4, 11 },
+						{ 8, 1, 2, -3, -3, 2, 1, 8 },
+						{ 8, 1, 2, -3, -3, 2, 1, 8 },
+						{ 11, -4, 2, 2, 2, 2, -4, 11 },
+						{ -3, -7, -4, 1, 1, -4, -7, -3 },
+						{ 20, -3, 11, 8, 8, 11, -3, 20 }};
+
+	// evaluate hPieceValue, hCurrentPieces, and hFuturePieces
+	for (int row = 0; row < 8; row++) {
+		for (int col = 0; col < 8; col++) {
+			if (currentBoard[row][col] == 'O') {
+				hPieceValue += pValues[row][col];
+				ai_pieces++;
+				for (int i = 0; i < 8; i++) {
+					int x = row + deltaX[i];
+					int y = col + deltaY[i];
+					if (positionInBounds(x, y) && currentBoard[x][y] == 'X') {
+						while (positionInBounds(x, y) && currentBoard[x][y] == 'X') {
+							x = x + deltaX[i];
+							y = y + deltaY[i];
+						}
+						if (positionInBounds(x, y) && currentBoard[x][y] == '|') {
+							ai_futPieces++;
+						}
+					}
+				}
+			}
+			else if (currentBoard[row][col] == 'X') {
+				hPieceValue -= pValues[row][col];
+				opp_pieces++;
+				for (int i = 0; i < 8; i++) {
+					int x = row + deltaX[i];
+					int y = col + deltaY[i];
+					if (positionInBounds(x, y) && currentBoard[x][y] == 'O') {
+						while (positionInBounds(x, y) && currentBoard[x][y] == 'O') {
+							x = x + deltaX[i];
+							y = y + deltaY[i];
+						}
+						if (positionInBounds(x, y) && currentBoard[x][y] == '|') {
+							opp_futPieces++;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	if (ai_pieces > opp_pieces)
+		hCurrentPieces = (100.0 * ai_pieces) / (ai_pieces + opp_pieces);
+	else if (ai_pieces < opp_pieces)
+		hCurrentPieces = (100.0 * opp_pieces) / (ai_pieces + opp_pieces);
+	else
+		hCurrentPieces = 0;
+
+	if (ai_futPieces > opp_futPieces)
+		hFuturePieces = (100.0 * ai_futPieces) / (ai_futPieces + opp_futPieces);
+	else if (ai_futPieces < opp_futPieces)
+		hFuturePieces = (100.0 * opp_futPieces) / (ai_futPieces + opp_futPieces);
+	else
+		hFuturePieces = 0;
+
+	// evaluate hCorners
+	ai_pieces = 0;
+	opp_pieces = 0;
+
+	if (currentBoard[0][0] == 'O')
+		ai_pieces++;
+	else if (currentBoard[0][0] == 'X')
+		opp_pieces++;
+	if (currentBoard[7][0] == 'O')
+		ai_pieces++;
+	else if (currentBoard[7][0] == 'X')
+		opp_pieces++;
+	if (currentBoard[0][7] == 'O')
+		ai_pieces++;
+	else if (currentBoard[0][7] == 'X')
+		opp_pieces++;
+	if (currentBoard[7][7] == 'O')
+		ai_pieces++;
+	else if (currentBoard[7][7] == 'X')
+		opp_pieces++;
+
+	hCorners = 25.0 * (ai_pieces - opp_pieces);
+
+	// evaluate hCornerCloseness
+	ai_pieces = 0;
+	opp_pieces = 0;
+
+	if (currentBoard[0][0] == '|') {
+		if (currentBoard[0][1] == 'O')
+			ai_pieces++;
+		else if (currentBoard[0][1] == 'X')
+			opp_pieces++;
+		if (currentBoard[1][1] == 'O')
+			ai_pieces++;
+		else if (currentBoard[1][1] == 'X')
+			opp_pieces++;
+		if (currentBoard[1][0] == 'O')
+			ai_pieces++;
+		else if (currentBoard[1][0] == 'X')
+			opp_pieces++;
+	}
+	if (currentBoard[7][0] == '|') {
+		if (currentBoard[7][1] == 'O')
+			ai_pieces++;
+		else if (currentBoard[7][1] == 'X')
+			opp_pieces++;
+		if (currentBoard[6][1] == 'O')
+			ai_pieces++;
+		else if (currentBoard[6][1] == 'X')
+			opp_pieces++;
+		if (currentBoard[6][0] == 'O')
+			ai_pieces++;
+		else if (currentBoard[6][0] == 'X')
+			opp_pieces++;
+	}
+	if (currentBoard[0][7] == '|') {
+		if (currentBoard[0][6] == 'O')
+			ai_pieces++;
+		else if (currentBoard[0][6] == 'X')
+			opp_pieces++;
+		if (currentBoard[1][6] == 'O')
+			ai_pieces++;
+		else if (currentBoard[1][6] == 'X')
+			opp_pieces++;
+		if (currentBoard[1][7] == 'O')
+			ai_pieces++;
+		else if (currentBoard[1][7] == 'X')
+			opp_pieces++;
+	}
+	if (currentBoard[7][7] == '|') {
+		if (currentBoard[6][7] == 'O')
+			ai_pieces++;
+		else if (currentBoard[6][7] == 'X')
+			opp_pieces++;
+		if (currentBoard[6][6] == 'O')
+			ai_pieces++;
+		else if (currentBoard[6][6] == 'X')
+			opp_pieces++;
+		if (currentBoard[7][6] == 'O')
+			ai_pieces++;
+		else if (currentBoard[7][6] == 'X')
+			opp_pieces++;
+	}
+
+	hCornerCloseness = -12.5 * (ai_pieces - opp_pieces);
+
+	// evaluate hMovesAvail
+	ai_pieces = numValidMoves('O', 'X', currentBoard);
+	opp_pieces = numValidMoves('X', 'O', currentBoard);
+
+	if (ai_pieces > opp_pieces)
+		hMovesAvail = (100.0 * ai_pieces) / (ai_pieces + opp_pieces);
+	else if (ai_pieces < opp_pieces)
+		hMovesAvail = -(100.0 * opp_pieces) / (ai_pieces + opp_pieces);
+	else
+		hMovesAvail = 0;
+
+	// evaluate final score for current board
+	score = hCurrentPieces + hCorners + hCornerCloseness + hMovesAvail + hFuturePieces + hPieceValue;
+	return score;
+}
+
+// counts the valid moves for the given player in the current board
+int numValidMoves(char player, char opp, char currentBoard[8][8]) {
+	int count = 0;
+
+	int deltaX[] = { -1, -1, -1, 0, 1, 1, 1, 0 };
+	int deltaY[] = { -1, 0, 1, 1, 1, 0, -1, -1 };
+
+	for (int row = 0; row < 8; row++) {
+		for (int col = 0; col < 8; col++) {
+			if (currentBoard[row][col] == player) {
+				for (int i = 0; i < 8; i++) {
+					int x = row + deltaX[i];
+					int y = col + deltaY[i];
+					if (positionInBounds(x, y) && currentBoard[x][y] == opp) {
+						while (positionInBounds(x, y) && currentBoard[x][y] == opp) {
+							x = x + deltaX[i];
+							y = y + deltaY[i];
+						}
+						if (positionInBounds(x, y) && currentBoard[x][y] == '|') {
+							count++;
+						}
+					}
+				}
+			}
+		}
+	}
+	return count;
 }
