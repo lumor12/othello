@@ -23,12 +23,20 @@ int main()
 
     //order = get_order(player);
 //    largest = ((a > b) ? a : b);
+	/*
+	char player1 = 'X';
+	char player2 = 'O';
+	Othello2 game = Othello2();
+	game.printGameBoard();
 
-
-
+	game.findPieces(player1);
+	game.printXPieces();
+	game.findPieces(player2);
+	game.printOPieces();
+	*/
 	cout << "\nthis is the test of Othello2" << endl;
 	test2();
-
+	system("PAUSE");
     return 0;
 }
 

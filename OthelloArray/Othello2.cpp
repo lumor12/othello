@@ -24,15 +24,15 @@ void Othello2::setCurrentPlayer(char p) {
 
 void Othello2::getX_pieces(int cords[][2]) {
 	for (int row = 0; row < XNumPieces; row++) {
-		cords[row][0] = x_pieces[row][0];
-		cords[row][1] = x_pieces[row][1];
+		cords[row][0] = Xpieces[row].getRow();
+		cords[row][1] = Xpieces[row].getCol();
 	}
 }
 
 void Othello2::getO_pieces(int cords[][2]) {
 	for (int row = 0; row < ONumPieces; row++) {
-		cords[row][0] = o_pieces[row][0];
-		cords[row][1] = o_pieces[row][1];
+		cords[row][0] = Opieces[row].getRow();
+		cords[row][1] = Opieces[row].getCol();
 	}
 }
 
@@ -51,14 +51,14 @@ int Othello2::getONumMoves() {
 void Othello2::getMovesAvail(int cords[][2]) {
 	if (currentPlayer == 'X') {
 		for (int row = 0; row < X_moves; row++) {
-			cords[row][0] = X_movesAvail[row][0];
-			cords[row][1] = X_movesAvail[row][1];
+			cords[row][0] = XmovesAvail[row].getRow();
+			cords[row][1] = XmovesAvail[row].getCol();
 		}
 	}
 	if (currentPlayer == 'O') {
 		for (int row = 0; row < O_moves; row++) {
-			cords[row][0] = O_movesAvail[row][0];
-			cords[row][1] = O_movesAvail[row][1];
+			cords[row][0] = OmovesAvail[row].getRow();
+			cords[row][1] = OmovesAvail[row].getCol();
 		}
 	}
 }
@@ -70,13 +70,16 @@ void Othello2::availableMoves() {
 	int tempY;
 	int i = 0;
 
+	XmovesAvail.clear();
+	OmovesAvail.clear();
+
 	if (currentPlayer == 'X') {
 		for (int row = 0; row < XNumPieces; row++) {
 			for (deltaX = -1; deltaX < 2; deltaX++) {
 				for (deltaY = -1; deltaY < 2; deltaY++) {
 					if (deltaX != 0 || deltaY != 0) {
-						tempX = x_pieces[row][0] + deltaX;
-						tempY = x_pieces[row][1] + deltaY;
+						tempX = Xpieces[row].getRow() + deltaX;
+						tempY = Xpieces[row].getCol() + deltaY;
 
 						if (positionInBounds(tempX, tempY) && board[tempX][tempY] == 'O') {
 							while (positionInBounds(tempX, tempY) && board[tempX][tempY] == 'O') {
@@ -84,9 +87,8 @@ void Othello2::availableMoves() {
 								tempY = tempY + deltaY;
 							}
 							if (positionInBounds(tempX, tempY) && board[tempX][tempY] == '|') {
-								X_movesAvail[i][0] = tempX;
-								X_movesAvail[i][1] = tempY;
-								i++;
+								XmovesAvail.push_back(Point(tempX, tempY));
+								//i++;
 								X_moves++;
 							}
 						}
@@ -104,8 +106,8 @@ void Othello2::availableMoves() {
 			for (deltaX = -1; deltaX < 2; deltaX++) {
 				for (deltaY = -1; deltaY < 2; deltaY++) {
 					if (deltaX != 0 || deltaY != 0) {
-						tempX = o_pieces[row][0] + deltaX;
-						tempY = o_pieces[row][1] + deltaY;
+						tempX = Opieces[row].getRow() + deltaX;
+						tempY = Opieces[row].getCol() + deltaY;
 
 						if (positionInBounds(tempX, tempY) && board[tempX][tempY] == 'X') {
 							while (positionInBounds(tempX, tempY) && board[tempX][tempY] == 'X') {
@@ -113,9 +115,8 @@ void Othello2::availableMoves() {
 								tempY = tempY + deltaY;
 							}
 							if (positionInBounds(tempX, tempY) && board[tempX][tempY] == '|') {
-								O_movesAvail[i][0] = tempX;
-								O_movesAvail[i][1] = tempY;
-								i++;
+								OmovesAvail.push_back(Point(tempX, tempY));
+								//i++;
 								O_moves++;
 							}
 						}
@@ -133,6 +134,9 @@ void Othello2::availableMoves() {
 void Othello2::findPieces(char p) {
 	int i = 0;  //tally position var was found. Will change to cordinates
 	int j = 0; // tally # of vars found
+	Xpieces.clear();
+	Opieces.clear();
+	
 	for (int row = 0; row < 8; row++) {
 		for (int column = 0; column < 8; column++) {
 			i++;
@@ -140,14 +144,12 @@ void Othello2::findPieces(char p) {
 				//cout << "first " << var <<" at " << i-1 << " X and Y cordinates ("
 				//<< row << ", " << column << ")" << endl;
 				if (p == 'X') {
-					x_pieces[j][0] = row;
-					x_pieces[j][1] = column;
+					Xpieces.push_back(Point(row, column));
 					j++;
 					XNumPieces++;
 				}
 				else if (p == 'O') {
-					o_pieces[j][0] = row;
-					o_pieces[j][1] = column;
+					Opieces.push_back(Point(row, column));
 					j++;
 					ONumPieces++;
 				}
@@ -185,14 +187,14 @@ void Othello2::printGameBoard() {
 void Othello2::printXPieces() {
 	cout << "\nThe pieces for X are in" << endl;
 	for (int row = 0; row < XNumPieces; row++) {
-		cout << "(" << x_pieces[row][0] << ", " << x_pieces[row][1] << ")" << endl;
+		cout << "(" << Xpieces[row].getRow() << ", " << Xpieces[row].getCol() << ")" << endl;
 	}
 }
 
 void Othello2::printOPieces() {
 	cout << "The pieces for O are in" << endl;
 	for (int row = 0; row < ONumPieces; row++) {
-		cout << "(" << o_pieces[row][0] << ", " << o_pieces[row][1] << ")" << endl;
+		cout << "(" << Opieces[row].getRow() << ", " << Opieces[row].getCol() << ")" << endl;
 	}
 }
 
@@ -252,7 +254,7 @@ void Othello2::oMove(){
     //cout << "you chose row -" << orow << " col-" << ocol << endl;
     while(in ==0){
         for(int row = 0; row < O_moves; row++){
-            if(O_movesAvail[row][0]==orow && O_movesAvail[row][1]==ocol){
+            if(OmovesAvail[row].getRow()==orow && OmovesAvail[row].getCol()==ocol){
                 //cout << "That is a legal move, store and update " << getCurrentPlayer()<< endl;
                 board[orow][ocol] = 'O';
                 //printGameBoard();
@@ -282,7 +284,7 @@ void Othello2::xMove(){
     //cout << "you chose row -" << xrow << " col-" << xcol << endl;
     while(in ==0){
         for(int row = 0; row < X_moves; row++){
-            if(X_movesAvail[row][0]==xrow && X_movesAvail[row][1]==xcol){
+            if(XmovesAvail[row].getRow()==xrow && XmovesAvail[row].getCol()==xcol){
                 //cout << "That is a legal move, store and update " << currentPlayer << endl;
                 board[xrow][xcol] = 'X';
                 flips(xrow, xcol);
@@ -303,14 +305,14 @@ void Othello2::xMove(){
 void Othello2::printXMoves() {
 	cout << "\nThe legal moves for X" << endl;
 	for (int row = 0; row < X_moves; row++) {
-		cout << "(" << X_movesAvail[row][0] << ", " << X_movesAvail[row][1] << ")" << endl;
+		cout << "(" << XmovesAvail[row].getRow() << ", " << XmovesAvail[row].getCol() << ")" << endl;
 	}
 }
 
 void Othello2::printOMoves() {
 	cout << "\nThe legal moves for O" << endl;
 	for (int row = 0; row < O_moves; row++) {
-		cout << "(" << O_movesAvail[row][0] << ", " << O_movesAvail[row][1] << ")" << endl;
+		cout << "(" << OmovesAvail[row].getRow() << ", " << OmovesAvail[row].getCol() << ")" << endl;
 	}
 }
 
@@ -489,7 +491,7 @@ double Othello2::eval_func(char currentBoard[8][8]) {
 	else
 		hMovesAvail = 0;
 
-	// evaluate final score for current board
+	// evaluate final score for current board. Still need to figure out the weight of each heuristic
 	score = hCurrentPieces + hCorners + hCornerCloseness + hMovesAvail + hFuturePieces + hPieceValue;
 	return score;
 }

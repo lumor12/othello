@@ -1,20 +1,30 @@
 #pragma once
+#include <vector>
+#include "Point.h"
 
 class Othello2
 {
 	private:
 		char board[8][8];
-		int x_pieces[8][2];
-		int o_pieces[8][2];
+		//int x_pieces[8][2];
+		//int o_pieces[8][2];
 		char currentPlayer;
 		int XNumPieces = 0;
 		int ONumPieces = 0;
-		int X_movesAvail[8][2];
-		int O_movesAvail[8][2];
+		//int X_movesAvail[20][2];
+		//int O_movesAvail[20][2];
 		int X_moves = 0;
 		int O_moves = 0;
 		int X_flips = 2;
 		int O_flips = 2;
+		
+		//	using Point class to hold the row and column. Made it easier to use the vectors to store and access the data we need
+		std::vector<Point> Xpieces;
+		std::vector<Point> Opieces;
+
+		std::vector<Point> XmovesAvail;
+		std::vector<Point> OmovesAvail;
+
 
 
 	public:
@@ -41,4 +51,5 @@ class Othello2
 		void findPieces2();
 		double eval_func(char currentBoard[8][8]);
 		friend int numValidMoves(char player, char opp, char currentBoard[8][8]);
+		//void lookAhead(int n);
 };
