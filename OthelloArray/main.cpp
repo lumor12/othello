@@ -21,22 +21,9 @@ int main()
 
     //cout << "Opponet = " << opponent << " player = " << player << endl;
 
-    //order = get_order(player);
-//    largest = ((a > b) ? a : b);
-	/*
-	char player1 = 'X';
-	char player2 = 'O';
-	Othello2 game = Othello2();
-	game.printGameBoard();
-
-	game.findPieces(player1);
-	game.printXPieces();
-	game.findPieces(player2);
-	game.printOPieces();
-	*/
-	cout << "\nthis is the test of Othello2" << endl;
+   	cout << "\nthis is the test of Othello2" << endl;
 	test2();
-	system("PAUSE");
+	//system("PAUSE");
     return 0;
 }
 
@@ -50,30 +37,38 @@ void test2() {
 
 	//display game board
 	game.printGameBoard();
-
-    for(int maini = 0; maini < 20 ; maini ++){
+    while(1){
+    //for(int maini = 0; maini < 20 ; maini ++){
 	//find the position of each players pieces on the board and print them
-        game.findPieces(player1);
+        int score[3];
         //game.printXPieces();
         //game.findPieces(player2);
         //game.printOPieces();
 
         //set the current player to X and get the available moves and print them
         game.setCurrentPlayer(player1);
+        //game.findPieces(player1);
+        game.findPieces();
         game.availableMoves();
-        game.printXMoves();
-        game.xMove();
-        game.findPieces2();
+        if(game.printXMoves()){
+           game.xMove();
+        }else { cout << "no moves available, moving on " << endl;}
+        if(!game.findPieces2()){break;}
 
         //set the current player to O and get the available moves and print them
-        game.findPieces(player2);
+        //game.findPieces(player2);
         game.setCurrentPlayer(player2);
+        game.findPieces();
         game.availableMoves();
-        game.printOMoves();
+        //game.printOMoves();
         //game.printGameBoard();
-        game.oMove();
-        game.findPieces2();
+        if(game.printXMoves()){
+           game.xMove();
+        }else { cout << "no moves available, moving on " << endl;}
+        if(!game.findPieces2()){break;}
+
     }
+    cout << "stop here " << endl;
 }
 
 int get_order(char cplayer){

@@ -36,6 +36,9 @@
 		<Unit filename="Othello.h" />
 		<Unit filename="Othello2.cpp" />
 		<Unit filename="Othello2.h" />
+		<Unit filename="Point.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

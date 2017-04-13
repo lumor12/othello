@@ -17,7 +17,7 @@ class Othello2
 		int O_moves = 0;
 		int X_flips = 2;
 		int O_flips = 2;
-		
+
 		//	using Point class to hold the row and column. Made it easier to use the vectors to store and access the data we need
 		std::vector<Point> Xpieces;
 		std::vector<Point> Opieces;
@@ -38,18 +38,20 @@ class Othello2
 		int getONumMoves();
 		void getMovesAvail(int cords[][2]);
 		void availableMoves();
+		void availableMovesOLD();
 		void findPieces(char player);
+		void findPieces();
 		void printGameBoard();
 		void printXPieces();
 		void printOPieces();
-		void printXMoves();
+		bool printXMoves();
 		void printOMoves();
-		friend bool positionInBounds(int x, int y);
+		bool positionInBounds(int x, int y);
 		void xMove();
 		void oMove();
 		void flips(int frow, int fcol);
-		void findPieces2();
+		bool findPieces2();
 		double eval_func(char currentBoard[8][8]);
-		friend int numValidMoves(char player, char opp, char currentBoard[8][8]);
+		int numValidMoves(char player, char opp, char currentBoard[8][8]);
 		//void lookAhead(int n);
 };
