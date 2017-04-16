@@ -63,7 +63,8 @@ void test2() {
         //game.printOMoves();
         //game.printGameBoard();
         if(game.printXMoves()){
-           game.xMove();
+           //game.xMove();
+			game.makeMove();
         }else { cout << "no moves available, moving on " << endl;}
         if(!game.findPieces2()){break;}
 
