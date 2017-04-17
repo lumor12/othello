@@ -1,23 +1,23 @@
 # depslib dependency file v1.0
-1492104595 source:c:\users\administrator\desktop\school\spring2017\480\othello\othelloarray\main.cpp
+1492466444 source:c:\users\administrator\desktop\school\spring2017\480\othello\othelloarray\main.cpp
 	<iostream>
 	"Othello.h"
 	"Othello2.h"
 	<queue>
 
-1491937228 c:\users\administrator\desktop\school\spring2017\480\othello\othelloarray\othello.h
+1492463763 c:\users\administrator\desktop\school\spring2017\480\othello\othelloarray\othello.h
 
-1491937228 source:c:\users\administrator\desktop\school\spring2017\480\othello\othelloarray\othello.cpp
+1492463763 source:c:\users\administrator\desktop\school\spring2017\480\othello\othelloarray\othello.cpp
 	<iostream>
 	"Othello.h"
 
-1492104483 c:\users\administrator\desktop\school\spring2017\480\othello\othelloarray\othello2.h
+1492463763 c:\users\administrator\desktop\school\spring2017\480\othello\othelloarray\othello2.h
 	<vector>
 	"Point.h"
 
-1492104403 source:c:\users\administrator\desktop\school\spring2017\480\othello\othelloarray\othello2.cpp
+1492466429 source:c:\users\administrator\desktop\school\spring2017\480\othello\othelloarray\othello2.cpp
 	<iostream>
 	"Othello2.h"
 
-1491937357 c:\users\administrator\desktop\school\spring2017\480\othello\othelloarray\point.h
+1492463763 c:\users\administrator\desktop\school\spring2017\480\othello\othelloarray\point.h
 

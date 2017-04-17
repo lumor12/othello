@@ -51,7 +51,7 @@ void test2() {
         game.findPieces();
         game.availableMoves();
         if(game.printXMoves()){
-           game.makeMove();
+           game.makeMove(); // why is this not working
         }else { cout << "no moves available, moving on " << endl;}
         if(!game.findPieces2()){break;}
 
@@ -64,7 +64,7 @@ void test2() {
         //game.printGameBoard();
         if(game.printXMoves()){
            //game.xMove();
-			game.makeMove();
+            game.makeMove();
         }else { cout << "no moves available, moving on " << endl;}
         if(!game.findPieces2()){break;}
 

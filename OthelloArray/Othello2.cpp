@@ -177,7 +177,7 @@ void Othello2::findPieces() {
 
 //	find the pieces for the given player in the given board. called by lookAhead() to find the pieces in a temp board
 vector<Point> Othello2::findPiecesLA(char p, char board[8][8]) {
-	
+
 	vector<Point> pieces;
 
 	for (int row = 0; row < 8; row++) {
@@ -213,12 +213,17 @@ bool Othello2::findPieces2() {
 }
 
 void Othello2::printGameBoard() {
+            cout << "   0 1 2 3 4 5 6 7" << endl;
+            cout << "  -----------------" << endl;
 	for (int row = 0; row < 8; row++) {
+            cout << row << "| ";
 		for (int column = 0; column < 8; column++) {
 			cout << board[row][column] << " ";
+			if(column == 7){ cout << "|" ;}
 		}
 		cout << endl;
 	}
+	cout << "  -----------------" << endl;
 }
 
 void Othello2::printXPieces() {
@@ -364,6 +369,7 @@ void Othello2::xMove(){
     }
 
 }
+
 bool Othello2::printXMoves() {
     if(X_moves == 0){
         return false;
@@ -601,9 +607,10 @@ int Othello2::numValidMoves(char player, char opp, char currentBoard[8][8]) {
 
 // does the look ahead and evaluates the available moves. Called by makeMove(). could use some ideas on how to make this work. Getting stack overflow errors, need to keep looking at this.
 vector<double> Othello2::lookAhead(int n, char player, vector<Point> availMoves, char board[8][8]) {
+	//cout << "for some reason dies here " << endl;
 	vector<double> moveValues (availMoves.size(), 0.0);
 	char opponent = (player == 'O') ? 'X' : 'O';
-	while (n > 0) {
+	if (n > 0) {
 		if (n % 2 == 0) {
 			for (int i = 0; i < availMoves.size(); i++) {
 				char tempBoard[8][8];
@@ -617,8 +624,8 @@ vector<double> Othello2::lookAhead(int n, char player, vector<Point> availMoves,
 				moveValues[i] += eval_func(tempBoard);
 				vector<Point> nPieces = findPiecesLA(opponent, tempBoard);
 				vector<Point> nAvailMovs = availableMovesLA(opponent, tempBoard, nPieces);
-				n--;
-				lookAhead(n, opponent, nAvailMovs, tempBoard);
+				//n--;
+				lookAhead(n-1, opponent, nAvailMovs, tempBoard);
 			}
 			//n--;
 		}
@@ -635,8 +642,8 @@ vector<double> Othello2::lookAhead(int n, char player, vector<Point> availMoves,
 				moveValues[i] += eval_func(tempBoard);
 				vector<Point> nPieces = findPiecesLA(player, tempBoard);
 				vector<Point> nAvailMovs = availableMovesLA(player, tempBoard, nPieces);
-				n--;
-				lookAhead(n, player, nAvailMovs,tempBoard);
+				//n--;
+				lookAhead(n-1, player, nAvailMovs,tempBoard);
 			}
 			//n--;
 		}
