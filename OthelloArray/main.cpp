@@ -40,7 +40,7 @@ void test2() {
     while(1){
     //for(int maini = 0; maini < 20 ; maini ++){
 	//find the position of each players pieces on the board and print them
-        int score[3];
+        //int score[3];
         //game.printXPieces();
         //game.findPieces(player2);
         //game.printOPieces();
@@ -51,7 +51,7 @@ void test2() {
         game.findPieces();
         game.availableMoves();
         if(game.printXMoves()){
-           game.xMove();
+           game.makeMove();
         }else { cout << "no moves available, moving on " << endl;}
         if(!game.findPieces2()){break;}
 
