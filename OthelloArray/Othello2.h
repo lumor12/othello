@@ -20,9 +20,11 @@ class Othello2
 
 		//	using Point class to hold the row and column. Made it easier to use the vectors to store and access the data we need
 		std::vector<Point> Xpieces;
+		//std::vector<Point> *pXpieces = &Xpieces;
 		std::vector<Point> Opieces;
 
 		std::vector<Point> XmovesAvail;
+		//std::vector<Point> *pXmovesAvail = &XmovesAvail;
 		std::vector<Point> OmovesAvail;
 
 
